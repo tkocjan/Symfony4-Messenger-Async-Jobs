@@ -3,7 +3,11 @@ framework:
         transports:
             # Uncomment the following line to enable a transport named "amqp"
             # amqp: '%env(MESSENGER_TRANSPORT_DSN)%'
+            amqp: enqueue://default
 
         routing:
             # Route your messages to the transports
             # 'App\Message\YourMessage': amqp
+            'App\Core\Domain\Message\CreateSalesOrder':
+                senders: [amqp]
+                send_and_handle: true
